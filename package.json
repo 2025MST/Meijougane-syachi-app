@@ -1,0 +1,45 @@
+{
+  "name": "meijougane-syachi-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.2.0",
+    "@mui/material": "^6.2.0",
+    "axios": "^1.7.9",
+    "cra-template": "1.2.0",
+    "face-api.js": "^0.22.2",
+    "pixi-live2d-display-lipsyncpatch": "^0.5.0-ls-7",
+    "pixi.js": "^7.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "start:react": "react-scripts start",
+    "start:server" : "start /B ./server/voicevox_engine-windows-cpu-0.21.1/windows-cpu/run.exe",
+    "start" : "npm-run-all --parallel start:server start:react",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
