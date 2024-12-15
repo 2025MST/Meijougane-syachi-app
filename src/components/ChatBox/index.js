@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { InputTextBox } from './InputTextBox';
 import { ChatLog } from './ChatLog';
-import { useMicDetection } from '../../hooks/useMicDetection';
+import useSpeechDetection from '../../hooks/useSpeechDetection';
 
 export const ChatBox = ({ chatgpt, voicevox, isMicOn }) => {
     const [chatData, setChatData] = useState(() => {
@@ -10,24 +10,32 @@ export const ChatBox = ({ chatgpt, voicevox, isMicOn }) => {
         return savedChatData ? JSON.parse(savedChatData) : [];
     });
 
-    const handleSendInputText = useCallback(
-        async (inputData) => {
-            if (inputData.trim()) {
-                const userMessage = { from: 'user', text: inputData };
-                const aiResponse = await chatgpt.getChatgptResponse(inputData);
-                const aiMessage = { from: 'ai', text: aiResponse };
+    useEffect(() => {
+        // チャットデータが変更されたときにlocalStorageに保存
+        localStorage.setItem('chatData', JSON.stringify(chatData));
+    }, [chatData]);
 
-                const newChatData = [...chatData, userMessage, aiMessage];
-                setChatData(newChatData);
+    const handleSendInputText = async (inputData) => {
+        if (inputData.trim()) {
+            setChatData((prev) => {
+                const newChatData = [...prev, { from: 'user', text: inputData }];
+                localStorage.setItem('chatData', JSON.stringify(newChatData)); // 更新後に保存
+                return newChatData;
+            });
+
+            const aiResponse = await chatgpt.getChatgptResponse(inputData);
+
+            setChatData((prev) => {
+                const newChatData = [...prev, { from: 'ai', text: aiResponse}];
                 localStorage.setItem('chatData', JSON.stringify(newChatData));
+                return newChatData;
+            });
 
-                voicevox.generateVoice(aiResponse);
-            }
-        },
-        [chatData, chatgpt, voicevox]
-    );
+            voicevox.generateVoice(aiResponse);
+        }
+    };
 
-    const { interimText } = useMicDetection(isMicOn,handleSendInputText);
+    const { interimText } = useSpeechDetection(isMicOn,handleSendInputText);
 
     return (
         <Box

@@ -16,7 +16,6 @@ const App = () => {
 
 	const chatgpt = useChatgpt();
 	const voicevox = useVoiceVox();
-  	//const {videoRef,canvasRef,coordinates} = useFaceDetection();
 
 	return (
 		<div>
