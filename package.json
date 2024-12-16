@@ -17,12 +17,11 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start:react": "react-scripts start",
-    "start:server" : "start /B ./server/voicevox_engine-windows-cpu-0.21.1/windows-cpu/run.exe",
-    "start" : "npm-run-all --parallel start:server start:react",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "serve -s ./build"
   },
   "eslintConfig": {
     "extends": [

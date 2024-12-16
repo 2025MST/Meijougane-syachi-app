@@ -7,6 +7,8 @@ const useChatgpt = () => {
 
     const getChatgptResponse = useCallback(async (userMessage) => {
 
+        console.log(process.env.REACT_APP_OPENAI_PUBLIC_KEY);
+
         const chatgptPayload = {
             model : "gpt-3.5-turbo",
             messages : [
@@ -56,7 +58,7 @@ const useChatgpt = () => {
                 {
                     headers: {
                         "Content-Type" : "application/json",
-                        Authorization : `Bearer ${process.env.OPENAI_PUBLIC_KEY}`
+                        Authorization : `Bearer ${process.env.REACT_APP_OPENAI_PUBLIC_KEY}`
                     },
                 }
             )

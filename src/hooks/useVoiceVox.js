@@ -14,7 +14,14 @@ const useVoiceVox = () => {
             const response = await axios.post(
                 `http://${VOICE_VOX_HOST}:${VOICE_VOX_PORT}/audio_query`,
                 null,
-                { params: {text, speaker}, timeout: 30000}
+                {
+                    params: {
+                        text: text || "良く聞こえなかったわ...もう一度言ってみてな！",
+                        speaker: speaker,
+                    },
+                    headers: {'Content-Type' : 'application/json'},
+                    timeout: 10000,
+                }
             );
             return response.data;
         } catch (err) {
@@ -28,10 +35,10 @@ const useVoiceVox = () => {
                 `http://${VOICE_VOX_HOST}:${VOICE_VOX_PORT}/synthesis`,
                 queryData,
                 {
-                    params: {speaker},
+                    params: { speaker: speaker },
                     headers: { "Content-Type": "application/json"},
                     responseType: "arraybuffer",
-                    timeout: 30000,
+                    timeout: 10000,
                 }
             );
             return response.data;
@@ -48,6 +55,7 @@ const useVoiceVox = () => {
             const queryData = await audioQuery(text, speaker);
             const audio = await synthesis(queryData,speaker);
             setAudioData(audio);
+            console.log("オーディオデータ : ",audio);
             setSpeech(true);
         } catch (err) {
             console.error("Generate Speech Audio Error : ", err);
