@@ -15,6 +15,7 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
     const dragStartRef = useRef({ x: 0, y: 0 }); // ドラッグ開始位置を保持
     const modelStartRef = useRef({ x: 0, y: 0 }); // モデルの開始位置を保持
     const scaleRef = useRef(1); // スケールを保持
+    const initialScaleRef = useRef(1); // 初期スケールを保持
 
     const [isIdle, setIsIdle] = useState(false);
 
@@ -106,9 +107,9 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
 
         const onWheel = (event) => {
             if (modelRef.current) {
-                const scaleFactor = 0.1; // 1回のホイール操作での拡大縮小率
+                const scaleFactor = 0.01; // 1回のホイール操作での拡大縮小率
                 const delta = event.deltaY > 0 ? -scaleFactor : scaleFactor; // スクロール方向で拡大・縮小
-                const newScale = Math.min(Math.max(scaleRef.current + delta, 0.5), 2); // 最小0.5倍、最大2倍
+                const newScale = Math.min(Math.max(scaleRef.current + delta, initialScaleRef.current * 0.5), initialScaleRef.current * 2); // 最小0.5倍、最大2倍
                 scaleRef.current = newScale;
                 modelRef.current.scale.set(newScale, newScale);
             }
@@ -123,6 +124,7 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
 
                 const scaleX = (appRef.current.view.width) / model.width;
                 const scaleY = (appRef.current.view.height) / model.height;
+                initialScaleRef.current = Math.min(scaleX, scaleY); // 初期スケールを保持
 
                 modelRef.current.scale.set(Math.min(scaleX, scaleY));
                 modelRef.current.anchor.set(0, 0);
