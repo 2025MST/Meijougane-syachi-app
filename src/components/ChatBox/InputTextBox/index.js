@@ -16,11 +16,11 @@ export const InputTextBox = ({ onSend, isMicOn, interimText }) => {
         <Box
             sx={{
                 position: 'absolute',
-                bottom: '15px',
+                bottom: '30px',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                width: '95%',
-                maxWidth: '500px',
+                width: '90%',
+                //maxWidth: '500px',
                 backgroundColor: '#f7f7f7',
                 borderRadius: 50,
                 display: 'flex',

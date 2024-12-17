@@ -26,7 +26,7 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
     useEffect(() => {
         const app = new PIXI.Application({
             view: appCanvasRef.current,
-            width: 1000,
+            width: window.innerWidth * 0.7,
             height: window.innerHeight * 0.95,
             backgroundColor: 0x1099bb,
         });
@@ -117,8 +117,19 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
 
         const Live2DLoader = async () => {
             try {
+                // 背景画像を読み込んでスプライトを作成
+                const backgroundTexture = PIXI.Texture.from('/images/1.png'); // 背景画像のパスを指定
+                const background = new PIXI.Sprite(backgroundTexture);
+        
+                // 背景のサイズをステージサイズに合わせる
+                background.width = appRef.current.view.width;
+                background.height = appRef.current.view.height;
+        
+                // 背景をステージに追加
+                appRef.current.stage.addChild(background);
+
+                //モデル追加
                 const model = await Live2DModel.from('/live2d-models/Meijougane_syachi/meijougane_syachi.model3.json');
-                // const model = await Live2DModel.from('/live2d-models/Kei/kei_basic_free.model3.json');
                 modelRef.current = model;
                 appRef.current.stage.addChild(model);
 

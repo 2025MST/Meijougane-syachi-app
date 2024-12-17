@@ -3,7 +3,7 @@ import { Box, FormControl, TextField } from "@mui/material";
 import useFaceDetection from "../../hooks/useFaceDetection";
 import { VideoFileRounded } from "@mui/icons-material";
 
-export const SettingModal = ({videoId, setVideoId, toggleYoutubeCommentDetection, setToggleYoutubeCommentDetection}) => {
+export const SettingModal = () => {
 
     const { videoRef,canvasRef } = useFaceDetection();
 
@@ -13,9 +13,9 @@ export const SettingModal = ({videoId, setVideoId, toggleYoutubeCommentDetection
         }
     },[videoRef,canvasRef]);
 
-    const handleVideoIdChange = (event) => {
-        setVideoId(event.target.value);
-    }
+    // const handleVideoIdChange = (event) => {
+    //     setVideoId(event.target.value);
+    // }
 
     return(
         <Box sx={{
@@ -33,10 +33,10 @@ export const SettingModal = ({videoId, setVideoId, toggleYoutubeCommentDetection
             overflowY: "auto"
         }}>
             <h2>設定</h2>
-            <FormControl>
+            {/* <FormControl>
                 <h3>ライブID</h3>
                 <TextField label="Video ID" value={videoId} onChange={handleVideoIdChange}></TextField>
-            </FormControl>
+            </FormControl> */}
             <div style={{ position: "relative", width: "640px", height: "480px" }}>
                 <video
                     ref={videoRef}

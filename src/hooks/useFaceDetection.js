@@ -55,7 +55,7 @@ const useFaceDetection = () => {
         }
 
         const options = new faceapi.TinyFaceDetectorOptions({
-            inputSize: 128,
+            inputSize: 224,
             scoreThreshold: 0.5,
         });
 

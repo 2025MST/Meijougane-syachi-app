@@ -71,6 +71,7 @@ export const ChatLog = ({ chatData }) => {
     return (
         <Box
             sx={{
+                height: 'calc(100% - 120px)',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -80,15 +81,16 @@ export const ChatLog = ({ chatData }) => {
             <Box
                 ref={chatLogRef}
                 sx={{
-                    height: '600px',
+                    top: '0',
+                    height: '100%',
                     width: '100%',
                     overflowY: 'auto',
                     display: 'flex',
                     flexDirection: 'column',
-                    padding: '10px',
+                    padding: '0',
                     backgroundColor: '#B3E5FC', // 水色を少し濃くする
-                    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
-                    marginBottom: '10px',
+                    //boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+                    //marginBottom: '10px',
                     '&::-webkit-scrollbar': {
                         display: 'none',
                     },

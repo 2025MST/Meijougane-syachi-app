@@ -70,10 +70,10 @@ const App = () => {
 				onClose={() => setSettingOpen(false)}
 			>
 				<SettingModal
-					videoId={videoId}
-					setVideoId={setVideoId}
-					toggleYoutubeCommentDetection={toggleYoutubeCommentDetection}
-					setToggleYoutubeCommentDetection={toggleYoutubeCommentDetection}
+					// videoId={videoId}
+					// setVideoId={setVideoId}
+					// toggleYoutubeCommentDetection={toggleYoutubeCommentDetection}
+					// setToggleYoutubeCommentDetection={toggleYoutubeCommentDetection}
 				/>
 			</Modal>
 
