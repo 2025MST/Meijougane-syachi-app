@@ -116,13 +116,17 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
 
         const Live2DLoader = async () => {
             try {
-                const model = await Live2DModel.from('/live2d-models/Kei/kei_basic_free.model3.json');
+                const model = await Live2DModel.from('/live2d-models/Meijougane_syachi/meijougane_syachi.model3.json');
+                // const model = await Live2DModel.from('/live2d-models/Kei/kei_basic_free.model3.json');
                 modelRef.current = model;
                 appRef.current.stage.addChild(model);
 
-                model.scale.set(1, 1);
-                model.anchor.set(0, 0);
-                model.position.set(0, 0);
+                const scaleX = (appRef.current.view.width) / model.width;
+                const scaleY = (appRef.current.view.height) / model.height;
+
+                modelRef.current.scale.set(Math.min(scaleX, scaleY));
+                modelRef.current.anchor.set(0, 0);
+                modelRef.current.position.set(0, 0);
 
                 window.addEventListener('resize', () => {
                     if (modelRef.current) modelRef.current.position.set(0, 0);

@@ -1,8 +1,9 @@
 import React, {useEffect} from "react";
-import { Box } from "@mui/material";
+import { Box, FormControl, TextField } from "@mui/material";
 import useFaceDetection from "../../hooks/useFaceDetection";
+import { VideoFileRounded } from "@mui/icons-material";
 
-export const SettingModal = () => {
+export const SettingModal = ({videoId, setVideoId, toggleYoutubeCommentDetection, setToggleYoutubeCommentDetection}) => {
 
     const { videoRef,canvasRef } = useFaceDetection();
 
@@ -11,6 +12,10 @@ export const SettingModal = () => {
             console.error("ビデオとキャンバスが初期化されていません");
         }
     },[videoRef,canvasRef]);
+
+    const handleVideoIdChange = (event) => {
+        setVideoId(event.target.value);
+    }
 
     return(
         <Box sx={{
@@ -28,7 +33,10 @@ export const SettingModal = () => {
             overflowY: "auto"
         }}>
             <h2>設定</h2>
-            
+            <FormControl>
+                <h3>ライブID</h3>
+                <TextField label="Video ID" value={videoId} onChange={handleVideoIdChange}></TextField>
+            </FormControl>
             <div style={{ position: "relative", width: "640px", height: "480px" }}>
                 <video
                     ref={videoRef}
