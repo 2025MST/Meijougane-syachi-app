@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import * as faceapi from "face-api.js";
 
+const SMOOTH_ALPHA = 0.4;
+
 const useFaceDetection = () => {
     const videoRef = useRef(document.createElement("video"));
     const canvasRef = useRef(document.createElement("canvas"));
@@ -8,6 +10,9 @@ const useFaceDetection = () => {
     const [avgTime, setAvgTime] = useState(0);
     const [fps, setFps] = useState(0);
     const [coordinates, setCoordinates] = useState(null);
+    const smoothFocus = useRef({focusX : 0, focusY: 0});
+
+    const lerp = (current, target, alpha) => current + (target - current) * alpha;
 
     useEffect(() => {
         const loadModels = async () => {
@@ -55,7 +60,7 @@ const useFaceDetection = () => {
         }
 
         const options = new faceapi.TinyFaceDetectorOptions({
-            inputSize: 224,
+            inputSize: 256,
             scoreThreshold: 0.5,
         });
 
@@ -75,21 +80,27 @@ const useFaceDetection = () => {
             );
 
             faceapi.draw.drawDetections(canvas, [largestFace]);	
-            //const focusX = -((Math.round(largestFace.box.x) / videoEl.videoWidth) * 2 - 1);
-            //const focusY = -((Math.round(largestFace.box.y) / videoEl.videoHeight) * 2 - 1);
 
             const centerX = videoEl.videoWidth / 2;
             const centerY = videoEl.videoHeight / 2;
         
-            const focusX = -((Math.round(largestFace.box.x) + largestFace.box.width / 2 - centerX ) / centerX);
-            const focusY = -((Math.round(largestFace.box.y) + largestFace.box.height / 2 - centerY ) / centerY);
+            const targetFocusX = -((Math.round(largestFace.box.x) + largestFace.box.width / 2 - centerX ) / centerX);
+            const targetFocusY = -((Math.round(largestFace.box.y) + largestFace.box.height / 2 - centerY ) / centerY);
+
+            const newFocusX = lerp(smoothFocus.current.focusX, targetFocusX, SMOOTH_ALPHA);
+            const newFocusY = lerp(smoothFocus.current.focusY, targetFocusY, SMOOTH_ALPHA);
+
+            smoothFocus.current = {
+                focusX : newFocusX,
+                focusY : newFocusY,
+            }
 
             // 顔の座標を設定
             setCoordinates({
                 x: Math.round(largestFace.box.x),
                 y: Math.round(largestFace.box.y),
-                focusX : Math.max(-1, Math.min(1, focusX)),
-                focusY : Math.max(-1, Math.min(1, focusY)),
+                focusX : Math.max(-1, Math.min(1, newFocusX)),
+                focusY : Math.max(-1, Math.min(1, newFocusY)),
                 width: Math.round(largestFace.box.width),
                 height: Math.round(largestFace.box.height),
             });

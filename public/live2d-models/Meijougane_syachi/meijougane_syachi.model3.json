@@ -10,13 +10,19 @@
 	"Groups": [
 		{
 			"Target": "Parameter",
-			"Name": "LipSync",
-			"Ids": []
+			"Name": "EyeBlink",
+			"Ids": [
+				"ParamEyeLOpen",
+				"ParamEyeROpen"
+			]
 		},
 		{
 			"Target": "Parameter",
-			"Name": "EyeBlink",
-			"Ids": []
+			"Name": "LipSync",
+			"Ids": [
+				"ParamMouthForm",
+				"ParamMouthOpenY"
+			]
 		}
 	]
 }
