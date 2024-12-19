@@ -75,15 +75,21 @@ const useFaceDetection = () => {
             );
 
             faceapi.draw.drawDetections(canvas, [largestFace]);	
-            const focusX = -((Math.round(largestFace.box.x) / videoEl.videoWidth ) * 2 - 1);
-            const focusY = -((Math.round(largestFace.box.y) / videoEl.videoHeight) * 2 - 1);
+            //const focusX = -((Math.round(largestFace.box.x) / videoEl.videoWidth) * 2 - 1);
+            //const focusY = -((Math.round(largestFace.box.y) / videoEl.videoHeight) * 2 - 1);
+
+            const centerX = videoEl.videoWidth / 2;
+            const centerY = videoEl.videoHeight / 2;
         
+            const focusX = -((Math.round(largestFace.box.x) + largestFace.box.width / 2 - centerX ) / centerX);
+            const focusY = -((Math.round(largestFace.box.y) + largestFace.box.height / 2 - centerY ) / centerY);
+
             // 顔の座標を設定
             setCoordinates({
                 x: Math.round(largestFace.box.x),
                 y: Math.round(largestFace.box.y),
-                focusX,
-                focusY,
+                focusX : Math.max(-1, Math.min(1, focusX)),
+                focusY : Math.max(-1, Math.min(1, focusY)),
                 width: Math.round(largestFace.box.width),
                 height: Math.round(largestFace.box.height),
             });
