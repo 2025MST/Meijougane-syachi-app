@@ -27,7 +27,7 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
         const app = new PIXI.Application({
             view: appCanvasRef.current,
             width: window.innerWidth * 0.7,
-            height: window.innerHeight * 0.95,
+            height: window.innerHeight * 0.97,
             backgroundColor: 0x1099bb,
         });
         appRef.current = app;
@@ -144,11 +144,11 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
                 window.addEventListener('resize', () => {
                     if (modelRef.current) modelRef.current.position.set(0, 0);
                 });
-                window.addEventListener('mousemove', onMouseMove);
-                window.addEventListener('mousedown', onMouseDown);
-                window.addEventListener('mouseup', onMouseUp);
-                window.addEventListener('mouseout', onMouseOut);
-                window.addEventListener('wheel', onWheel);
+                appCanvasRef.current.addEventListener('mousemove', onMouseMove);
+                appCanvasRef.current.addEventListener('mousedown', onMouseDown);
+                appCanvasRef.current.addEventListener('mouseup', onMouseUp);
+                appCanvasRef.current.addEventListener('mouseout', onMouseOut);
+                appCanvasRef.current.addEventListener('wheel', onWheel);
             } catch (error) {
                 console.error('Error loading model:', error);
             }
@@ -157,11 +157,11 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
         Live2DLoader();
 
         return () => {
-            window.removeEventListener('mousemove', onMouseMove);
-            window.removeEventListener('mousedown', onMouseDown);
-            window.removeEventListener('mouseup', onMouseUp);
-            window.removeEventListener('mouseout', onMouseOut);
-            window.removeEventListener('wheel', onWheel);
+            appCanvasRef.current.removeEventListener('mousemove', onMouseMove);
+            appCanvasRef.current.removeEventListener('mousedown', onMouseDown);
+            appCanvasRef.current.removeEventListener('mouseup', onMouseUp);
+            appCanvasRef.current.removeEventListener('mouseout', onMouseOut);
+            appCanvasRef.current.removeEventListener('wheel', onWheel);
             cancelAnimationFrame(animationFrameRef.current);
             if (modelRef.current) {
                 modelRef.current.destroy();

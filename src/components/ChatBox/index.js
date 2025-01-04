@@ -40,8 +40,8 @@ export const ChatBox = ({ chatgpt, voicevox, isMicOn }) => {
     return (
         <Box
             sx={{
-                height: '95%',
-                width: '30%',
+                height: window.innerHeight * 0.97,
+                width: window.innerWidth * 0.3,
                 backgroundColor: '#f9f9f9',
                 position: 'absolute',
                 right: '0',
