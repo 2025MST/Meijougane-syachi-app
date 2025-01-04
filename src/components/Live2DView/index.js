@@ -129,7 +129,7 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
                 appRef.current.stage.addChild(background);
 
                 //モデル追加
-                const model = await Live2DModel.from('/live2d-models/Meijougane_syachi/meijougane_syachi.model3.json');
+                const model = await Live2DModel.from('/live2d-models/Meijougane_syachi/meijyougane_syachi.model3.json');
                 modelRef.current = model;
                 appRef.current.stage.addChild(model);
 
@@ -206,7 +206,7 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
     return (
         <>
             <canvas ref={appCanvasRef} />
-            <div style={{ visibility:"hidden", position: "absolute", top: "0", left:"0" }}>
+            <div style={{ visibility:"hidden", position: "absolute", top: "0", left:"0",width: "0", height: "0" }}>
                 <video
                     ref={videoRef}
                     autoPlay
