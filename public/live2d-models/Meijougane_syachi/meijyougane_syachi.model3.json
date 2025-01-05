@@ -6,7 +6,33 @@
 			"meijyougane_syachi.1024/texture_00.png"
 		],
 		"Physics": "meijyougane_syachi.physics3.json",
-		"DisplayInfo": "meijyougane_syachi.cdi3.json"
+		"DisplayInfo": "meijyougane_syachi.cdi3.json",
+		"Expressions": [
+			{
+				"Name": "happy_face",
+				"File": "expressions/happy_face.exp3.json"
+			},
+			{
+				"Name": "normal_face",
+				"File": "expressions/normal_face.exp3.json"
+			},
+			{
+				"Name": "surprise_face",
+				"File": "expressions/surprise_face.exp3.json"
+			},
+			{
+				"Name": "enjoy_face",
+				"File": "expressions/enjoy_face.exp3.json"
+			},
+			{
+				"Name": "question_face",
+				"File": "expressions/question_face.exp3.json"
+			},
+			{
+				"Name": "smug_face",
+				"File": "expressions/smug_face.exp3.json"
+			}
+		]
 	},
 	"Groups": [
 		{
@@ -25,5 +51,6 @@
 				"ParamEyeROpen"
 			]
 		}
-	]
+	],
+	"HitAreas": []
 }
