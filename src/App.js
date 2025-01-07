@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Live2DView from './components/Live2DView';
 import { Modal, Stack, } from '@mui/material';
-import { Comment, CommentsDisabled, Mic, MicOff, Settings, Videocam, VideocamOff } from '@mui/icons-material';
+import { Comment, CommentsDisabled, Mic, MicOff, Settings, Videocam, VideocamOff, YouTube } from '@mui/icons-material';
 import { TogleButton } from './components/TogleButton';
 import { SettingModal } from './components/SettingModal';
 import { ChatBox } from './components/ChatBox';
@@ -14,13 +14,10 @@ const App = () => {
 	const [toggleMic, setToggleMic] = useState(false);
 	const [toggleCamera, setToggleCamera] = useState(false);
 	const [toggleComment, setToggleComment] = useState(false);
-	const [toggleYoutubeCommentDetection, setToggleYoutubeCommentDetection] = useState(false);
-	const [toggleYoutubeCommentBox, setToggleYoutubeCommentBox] = useState(false);
-	const [videoId, setVideoId] = useState('');
+	const [toggleYoutubeComment, setToggleYoutubeComment] = useState(false);
 
 	const chatgpt = useChatgpt();
 	const voicevox = useVoiceVox();
-	//const youtubeComment = useYoutubeComment(videoId);
 
 	return (
 		<div>
@@ -62,6 +59,15 @@ const App = () => {
 					}}
 					innerIcon={toggleComment ? <Comment fontSize="inherit" /> : <CommentsDisabled fontSize="inherit" />}
 				/>
+				<TogleButton
+					label={"youtubeCommentBox"}
+					onClick={() => setToggleYoutubeComment(!toggleYoutubeComment)}
+					style={{
+						background : toggleYoutubeComment ? 'white' : 'black',
+						color : toggleYoutubeComment ? 'black' : 'white',
+					}}
+					innerIcon={<YouTube fontSize='inherit' />}
+				/>
 			</Stack>
 
 			<Modal
@@ -70,14 +76,14 @@ const App = () => {
 			>
 				<SettingModal/>
 			</Modal>
+			
+			{toggleYoutubeComment && (
+				<YoutubeCommentBox chatgpt={chatgpt} voicevox={voicevox} />
+			)}
 
 			{toggleComment && (
 				<ChatBox chatgpt={chatgpt} voicevox={voicevox} isMicOn={toggleMic} />
 			)}
-
-			{/* {toggleYoutubeCommentBox && (
-				<YoutubeCommentBox useYoutubeComment={youtubeComment} />
-			)} */}
 
 			<Live2DView voicevox={voicevox} isCameraOn={toggleCamera} chatgpt={chatgpt} />
 

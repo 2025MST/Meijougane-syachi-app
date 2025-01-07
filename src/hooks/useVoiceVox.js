@@ -47,7 +47,7 @@ const useVoiceVox = () => {
         }
     }
 
-    const generateVoice = async (text, speaker=1) => {
+    const generateVoice = async (text, speaker=58) => {
         setIsLoading(true);
         setAudioData(null);
 
