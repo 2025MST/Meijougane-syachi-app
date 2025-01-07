@@ -5,7 +5,7 @@ import useFaceDetection from '../../hooks/useFaceDetection';
 
 window.PIXI = PIXI;
 
-const Live2DView = ({ voicevox, isCameraOn }) => {
+const Live2DView = ({ voicevox, isCameraOn, chatgpt }) => {
     const appCanvasRef = useRef(null);
     const appRef = useRef(null); // PIXI.Applicationのインスタンスを保持
     const modelRef = useRef(null); // Live2Dモデルを保持
@@ -174,13 +174,15 @@ const Live2DView = ({ voicevox, isCameraOn }) => {
             const audioBlob = new Blob([voicevox.audioData], { type: 'audio/wav' });
             const audioURL = URL.createObjectURL(audioBlob);
 
+            modelRef.current.expression(chatgpt.emotion);
             modelRef.current.speak(audioURL,{
                 onFinish: () => {
                     voicevox.setSpeech(false);
+                    modelRef.current.expression('normal_face');
                 }
             });
         }
-    },[voicevox]);
+    },[voicevox,chatgpt]);
 
     useEffect(() => {
 

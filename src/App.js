@@ -85,7 +85,7 @@ const App = () => {
 				<ChatBox chatgpt={chatgpt} voicevox={voicevox} isMicOn={toggleMic} />
 			)}
 
-			<Live2DView voicevox={voicevox} isCameraOn={toggleCamera} />
+			<Live2DView voicevox={voicevox} isCameraOn={toggleCamera} chatgpt={chatgpt} />
 
 		</div>
 	);
