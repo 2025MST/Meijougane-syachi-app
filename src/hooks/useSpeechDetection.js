@@ -52,13 +52,11 @@ const useSpeechRecognition = (isMicOn, onRecognized) => {
             };
 
             recognition.onstart = () => {
-                console.log("Speech recognition started.");
                 setIsRecognizing(true);
                 setInterimText("");
             };
 
             recognition.onend = () => {
-                console.log("Speech recognition ended.");
                 setIsRecognizing(false);
                 setInterimText("");
             };

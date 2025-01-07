@@ -55,7 +55,6 @@ const useVoiceVox = () => {
             const queryData = await audioQuery(text, speaker);
             const audio = await synthesis(queryData,speaker);
             setAudioData(audio);
-            console.log("オーディオデータ : ",audio);
             setSpeech(true);
         } catch (err) {
             console.error("Generate Speech Audio Error : ", err);

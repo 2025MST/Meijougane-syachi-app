@@ -7,7 +7,6 @@ import { SettingModal } from './components/SettingModal';
 import { ChatBox } from './components/ChatBox';
 import useChatgpt from './hooks/useChatgpt';
 import useVoiceVox from './hooks/useVoiceVox';
-import useYoutubeComment from './hooks/useYoutubeComment';
 import YoutubeCommentBox from './components/YoutubeCommentBox';
 const App = () => {
 
@@ -69,12 +68,7 @@ const App = () => {
 				open={settingOpen}
 				onClose={() => setSettingOpen(false)}
 			>
-				<SettingModal
-					// videoId={videoId}
-					// setVideoId={setVideoId}
-					// toggleYoutubeCommentDetection={toggleYoutubeCommentDetection}
-					// setToggleYoutubeCommentDetection={toggleYoutubeCommentDetection}
-				/>
+				<SettingModal/>
 			</Modal>
 
 			{toggleComment && (
@@ -85,7 +79,7 @@ const App = () => {
 				<YoutubeCommentBox useYoutubeComment={youtubeComment} />
 			)} */}
 
-			<Live2DView voicevox={voicevox} isCameraOn={toggleCamera} />
+			<Live2DView voicevox={voicevox} isCameraOn={toggleCamera} chatgpt={chatgpt} />
 
 		</div>
 	);
