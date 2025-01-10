@@ -213,9 +213,19 @@ const Live2DView = ({ voicevox, isCameraOn, chatgpt }) => {
                     ref={videoRef}
                     autoPlay
                     muted
+                    style={{
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                    }}
                 />
                 <canvas
                     ref={canvasRef}
+                    style={{
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                    }}
                 />
             </div>
         </>
